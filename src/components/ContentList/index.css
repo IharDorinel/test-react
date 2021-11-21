@@ -1,0 +1,17 @@
+li {
+    list-style: none;
+    margin-right: 45px;
+}
+
+.Content {
+    font-size: 20px;
+}
+
+.figcaptionContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+figcaption {
+    margin-top: 10px;
+}

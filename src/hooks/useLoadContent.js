@@ -1,15 +1,23 @@
-import { useCallback, useState } from "react";
+import {useState} from "react";
 
 export const useLoadContent = () => {
+  
   const [imgList, setImgList] = useState([]);
-  const getContent = useCallback(async () => {
-    /* TODO: fetch images from this url: https://rickandmortyapi.com/api/character/
-      (to fetch with name add name in search query: https://rickandmortyapi.com/api/character/?name=rick)
-    */
-    setImgList([]);
-  }, []);
+  
+  const [visible, setVisible] = useState(10);
+  
+  const getContent = async (value) => {
+    await fetch(`https://rickandmortyapi.com/api/character/?name=${value}`)
+      .then(res => res.json())
+      .then(data => {
+        setVisible(10)
+        setImgList(data.results)
+      })
+  }
+  
+  const fetchMore = () => {
+    setVisible(init => init + 10)
+  }
 
-  // TODO: Put fetchMore method here
-
-  return [imgList, getContent];
+  return [imgList, visible, getContent, fetchMore];
 };
