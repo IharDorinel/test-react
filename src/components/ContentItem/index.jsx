@@ -3,7 +3,7 @@ const ContentItem = ({content, visible}) => {
   return content.slice(0, visible).map((item) => (
     <li key={item.id}>
       <figure>
-      <img src={item.image} alt={item.name} />
+      <img className="ContentImg" src={item.image} alt={item.name} />
       </figure>
       <div className="figcaptionContainer">
         <figcaption>Name: {item.name}</figcaption>

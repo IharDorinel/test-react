@@ -7,12 +7,21 @@ export const useLoadContent = () => {
   const [visible, setVisible] = useState(10);
   
   const getContent = async (value) => {
+    
     await fetch(`https://rickandmortyapi.com/api/character/?name=${value}`)
-      .then(res => res.json())
+      .then(res => (res.ok)
+        ? res.json()
+        : Promise.reject('is not ok: ' + res.status)
+      )
       .then(data => {
-        setVisible(10)
-        setImgList(data.results)
+          setVisible(10)
+          if(value !== '') {
+            setImgList(data.results)
+          } else {
+            alert('Please enter some value')
+          }
       })
+      .catch(() => setImgList([]))
   }
   
   const fetchMore = () => {
@@ -21,3 +30,4 @@ export const useLoadContent = () => {
 
   return [imgList, visible, getContent, fetchMore];
 };
+
